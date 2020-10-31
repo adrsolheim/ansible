@@ -1,0 +1,9 @@
+software:
+  - vlc
+  - 
+dev-utils:
+  - mariadb-server
+  - htop
+
+software-source:
+  - atom

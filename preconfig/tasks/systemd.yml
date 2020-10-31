@@ -1,0 +1,6 @@
+- tasks:
+    - name: Enable SSH server
+      systemd:
+        state: started
+        enabled: yes
+        name: sshd
