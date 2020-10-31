@@ -1,0 +1,19 @@
+- name: Upgrade all packages
+  dnf:
+    name: "*"
+    state: latest
+
+- name: Set hostname
+  hostname:
+    name: "{{ ansible_distribution | lower }}"
+    use: "{{ ansible_distribution_file_variety | lower }}"
+
+- name: Enable RPM fusion free 
+  yum_repository:
+    name: rpmfusion-free
+    baseurl: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch"
+
+- name: Enable RPM fusion non-free 
+  yum_repository:
+    name: rpmfusion-nonfree
+    baseurl: "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch"
