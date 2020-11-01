@@ -1,10 +1,2 @@
-- name: "Configure a fresh install of Fedora 33" 
-  hosts: localhost
-  pre_tasks:
-    include_tasks: 
-      - setup.yml
-  tasks:
-    include_tasks: 
-      - initialize.yml
-      - software.yml
-
+# Configure a fresh install of Fedora 33" 
+- include_tasks: setup.yml

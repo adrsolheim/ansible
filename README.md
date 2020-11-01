@@ -2,9 +2,9 @@ Make sure `gather_facts` is enabled.
 
 Make sure to `include_vars` the following `credentials.yml` in the playbook 
 ```
-ansible_become_method: enable
-ansible_become_user: myuser
-ansible_become_password: mypassword
+ansible_become_method: su
+ansible_become_user: root
+ansible_become_password: rootpassword
 ```
 `include_vars` take precedence over role `vars`.
 

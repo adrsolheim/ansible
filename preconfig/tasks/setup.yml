@@ -1,3 +1,4 @@
+---
 - name: Upgrade all packages
   dnf:
     name: "*"
@@ -6,20 +7,21 @@
 - name: Set hostname
   hostname:
     name: "{{ ansible_distribution | lower }}"
-    use: "{{ ansible_distribution_file_variety | lower }}"
 
 - name: Enable RPM fusion free 
   yum_repository:
     name: rpmfusion-free
     baseurl: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch"
+    description: "Community-maintained software repository providing additional packages that cannot be distributed in Fedora for legal reasons."
 
 - name: Enable RPM fusion non-free 
   yum_repository:
     name: rpmfusion-nonfree
     baseurl: "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch"
+    description: "Community-maintained software repository providing additional packages that cannot be distributed in Fedora for legal reasons."
     
 - name: Enable SSH server
-    systemd:
-      state: started
-      enabled: yes
-      name: sshd
+  systemd:
+    state: started
+    enabled: yes
+    name: sshd
