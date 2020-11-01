@@ -1,6 +1,22 @@
 Make sure `gather_facts` is enabled.
+  
+Example `playbook.yml`
+```
+---
+- hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - credentials.yml
+  roles:
+    - role: preconfig
+      become: yes
+    - role: software
+      become: yes
+```
 
-Make sure to `include_vars` the following `credentials.yml` in the playbook 
+Make sure to `include_vars` or `vars_files` the following `credentials.yml` in the playbook   
+
+Example `credentials.yml`
 ```
 ansible_become_method: su
 ansible_become_user: root

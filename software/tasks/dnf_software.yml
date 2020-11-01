@@ -1,0 +1,9 @@
+- name: Install packages from DNF
+  dnf:
+    name: "{{ dnf_software_list }}"
+    state: present
+
+- name: DNF done. Updating facts about packages
+  package_facts:
+    manager: rpm
+

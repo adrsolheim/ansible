@@ -1,0 +1,19 @@
+- name: Install RUST packages
+  block:
+    - command:
+        cmd: cargo install --list
+      register: cargo_packages
+      changed_when: False
+
+    - set_fact:
+        tealdeer_installed: "{{ cargo_packages.stdout | regex_search('tealdeer') | bool }}"
+
+    - name: Install TLDR+
+      command:
+        cmd: cargo install tealdeer
+      when: not tealdeer_installed
+      changed_when: not tealdeer_installed
+      notify: Move .cargo
+  when: "'cargo' in ansible_facts.packages.keys()"
+
+

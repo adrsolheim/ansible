@@ -1,0 +1,5 @@
+---
+- include_vars: packages.yml
+
+- include_tasks: dnf_software.yml
+- include_tasks: cargo_software.yml

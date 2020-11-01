@@ -1,0 +1,8 @@
+dnf_software_list:
+  - vlc
+  - openssl
+  - cargo
+  - npm
+
+cargo_software_list:
+  - tealdeer

@@ -1,0 +1,10 @@
+- name: Create directory for binaries
+  file:
+    path: "{{ lookup('env', 'HOME') }}/bin"
+    state: directory
+    mode: "0761"
+
+
+- name: Move dotfiles
+  debug:
+    msg: "TODO: move dotfiles to .config" 
