@@ -1,3 +1,11 @@
+Make sure to import the following `vars_file` in the playbook calling the roles
+```
+ansible_become_method: enable
+ansible_become_user: myuser
+ansible_become_password: mypassword
+``
+
+
 Statically import tasks (*paste the tasks right here*)
 `import_tasks: tasks/commands.yml`  
 
