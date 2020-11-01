@@ -1,3 +1,5 @@
+Make sure `gather_facts` is enabled.
+
 Make sure to `include_vars` the following `credentials.yml` in the playbook 
 ```
 ansible_become_method: enable

@@ -17,3 +17,9 @@
   yum_repository:
     name: rpmfusion-nonfree
     baseurl: "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch"
+    
+- name: Enable SSH server
+    systemd:
+      state: started
+      enabled: yes
+      name: sshd
