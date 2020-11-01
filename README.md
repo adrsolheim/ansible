@@ -1,9 +1,10 @@
-Make sure to import the following `vars_file` in the playbook calling the roles
+Make sure to `include_vars` the following `credentials.yml` in the playbook 
 ```
 ansible_become_method: enable
 ansible_become_user: myuser
 ansible_become_password: mypassword
-``
+```
+`include_vars` take precedence over role `vars`.
 
 
 Statically import tasks (*paste the tasks right here*)
