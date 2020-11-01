@@ -1,0 +1,5 @@
+dist_slug: "{{ ansible_distribution | lower }}"
+rpmfusion_free_gpg_key: "https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-{{ dist_slug }}-2020"
+rpmfusion_nonfree_gpg_key: "https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-{{ dist_slug }}-2020"
+rpmfusion_free_repository: "https://download1.rpmfusion.org/free/{{ dist_slug }}/rpmfusion-free-release-{{ ansible_distribution_major_version  }}.noarch.rpm"
+rpmfusion_nonfree_repository: "https://download1.rpmfusion.org/nonfree/{{ dist_slug }}/rpmfusion-nonfree-release-{{ ansible_distribution_major_version  }}.noarch.rpm"
