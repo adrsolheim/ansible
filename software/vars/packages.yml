@@ -1,6 +1,6 @@
 dnf_software_list:
   - vlc
-  - openssl
+  - openssl-devel
   - cargo
   - npm
 
