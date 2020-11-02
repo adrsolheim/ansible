@@ -13,7 +13,7 @@
         cmd: cargo install tealdeer
       when: not tealdeer_installed
       changed_when: not tealdeer_installed
-      notify: Move .cargo
+      #notify: Move .cargo
   when: "'cargo' in ansible_facts.packages.keys()"
 
 

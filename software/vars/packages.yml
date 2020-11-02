@@ -3,6 +3,9 @@ dnf_software_list:
   - openssl-devel
   - cargo
   - npm
+  - htop
+  - vlc
+  - anki
 
 cargo_software_list:
   - tealdeer
