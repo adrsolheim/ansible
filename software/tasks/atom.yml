@@ -1,0 +1,16 @@
+- name: Enable atom repository
+  yum_repository:
+    name: Atom
+    file: atom
+    description: Atom.io repository
+    baseurl: https://packagecloud.io/AtomEditor/atom/el/7/$basearch
+    gpgkey: https://packagecloud.io/AtomEditor/atom/gpgkey
+    repo_gpgcheck: yes
+    gpgcheck: no
+    state: present
+
+- name: Install Atom
+  dnf:
+    name: atom
+    state: present
+    enablerepo: atom

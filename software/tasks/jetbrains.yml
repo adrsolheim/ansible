@@ -1,0 +1,5 @@
+- name: Download and extract jetbrains toolbox tarball
+  unarchive:
+    src: https://data.services.jetbrains.com/products/download?platform=linux&code=TBA
+    dest: /opt
+    remote_src: yes
