@@ -21,6 +21,7 @@ Example `credentials.yml`
 ansible_become_method: su
 ansible_become_user: root
 ansible_become_password: rootpassword
+system_user: bob
 ```
 `include_vars` take precedence over role `vars`.
 

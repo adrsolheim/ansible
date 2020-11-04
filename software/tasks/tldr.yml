@@ -13,6 +13,8 @@
       when: not tealdeer_installed
       changed_when: not tealdeer_installed
       register: tealdeer_out
+      become_user: "{{ system_user }}"
+      become: yes
       #notify: Move .cargo
   when: "'cargo' in ansible_facts.packages.keys()"
 
