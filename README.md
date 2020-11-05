@@ -1,3 +1,6 @@
+Requirements
+* `ansible-galaxy collection install community.general`
+
 Make sure `gather_facts` is enabled.
   
 Example `playbook.yml`

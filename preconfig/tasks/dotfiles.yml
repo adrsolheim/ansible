@@ -1,0 +1,29 @@
+- name: Fetch dotfiles
+  block:
+  - name: Create tmp dir
+    file:
+      path: "{{ homedir }}/tmp/dotfiles"
+      state: directory
+
+  - name: Pull dotfiles from repo
+    git:
+      repo: "{{ dotfiles }}"
+      dest: "{{ homedir }}/tmp/dotfiles"
+      update: yes
+
+  - name: Copy .vimrc into home
+    copy:
+      src: "{{ homedir }}/tmp/dotfiles/.vimrc"
+      dest: "{{ homedir }}/.vimrc"
+
+  - name: Copy .bashrc into home
+    copy:
+      src: "{{ homedir }}/tmp/dotfiles/.bashrc"
+      dest: "{{ homedir }}/.bashrc"
+
+  - name: Source .bashrc
+    shell: source {{ homedir }}/.bashrc
+    changed_when: False
+  become: yes
+  become_user: "{{ ansible_user_id }}"
+      

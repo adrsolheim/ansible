@@ -1,2 +1,3 @@
 # Configure a fresh install of Fedora 33" 
+- include_tasks: dotfiles.yml
 - include_tasks: setup.yml
