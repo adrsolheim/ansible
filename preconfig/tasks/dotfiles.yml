@@ -24,11 +24,35 @@
   - name: Source .bashrc
     shell: source {{ homedir }}/.bashrc
     changed_when: False
-  become: yes
-  become_user: "{{ ansible_user_id }}"
+    become: yes
+    become_user: "{{ ansible_user_id }}"
       
+  - set_fact:
+      lessxdg: "{{ lookup('env', 'XDG_CACHE_HOME') }}/less"
+
+  - name: Create cache directory for the less tool
+    file:
+      path: "{{ lessxdg }}"
+      state: directory
+    become: yes
+    become_user: "{{ ansible_user_id }}"
+    changed_when: False
+
   - name: Create config directory for the less tool
     file:
-      path: "{{ lookup('env', 'XDG_CACHE_HOME' }}/less"
+      path: "{{ lookup('env', 'XDG_CONFIG_HOME') }}/less"
       state: directory
+    become: yes
+    become_user: "{{ ansible_user_id }}"
     changed_when: False
+
+  - name: .lesshst
+    stat: 
+      path: "{{ homedir }}/.lesshst"
+    register: lesshst
+
+  - name: Move .lesshst out of homedir
+    shell: mv {{ lesshst.stat.path }} {{ lessxdg }}/history
+    when: lesshst.stat.exists
+    changed_when: lesshst.stat.exists
+
