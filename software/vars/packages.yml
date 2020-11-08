@@ -1,4 +1,5 @@
 dnf_software_list:
+  - python3
   - vlc
   - openssl-devel
   - cargo
@@ -6,6 +7,9 @@ dnf_software_list:
   - htop
   - vlc
   - anki
-
-cargo_software_list:
-  - tealdeer
+  - texlive-scheme-full
+  - texmaker
+  - neovim
+  - python3-neovim
+  - sway
+  - ffmpeg

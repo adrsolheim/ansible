@@ -1,0 +1,5 @@
+- name: Create config directory for the less tool
+  file:
+    path: "{{ lookup('env', 'XDG_CACHE_HOME' }}/less"
+    state: directory
+  changed_when: False
