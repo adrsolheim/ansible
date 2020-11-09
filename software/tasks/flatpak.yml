@@ -1,0 +1,12 @@
+- name: Install Flatpak
+  dnf:
+    name: flatpak
+    state: present
+
+- name: Enable Flathub remote
+  community.general.flatpak_remote:
+    name: flathub
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+    state: present
+
+  

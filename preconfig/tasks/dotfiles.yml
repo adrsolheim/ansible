@@ -1,58 +1,83 @@
 - name: Fetch dotfiles
   block:
-  - name: Create tmp dir
-    file:
-      path: "{{ homedir }}/tmp/dotfiles"
-      state: directory
+    - name: Create tmp dir
+      file:
+        path: "{{ homedir }}/tmp/dotfiles"
+        state: directory
 
-  - name: Pull dotfiles from repo
-    git:
-      repo: "{{ dotfiles }}"
-      dest: "{{ homedir }}/tmp/dotfiles"
-      update: yes
+    - name: Pull dotfiles from repo
+      git:
+        repo: "{{ dotfiles }}"
+        dest: "{{ homedir }}/tmp/dotfiles"
+        update: yes
 
-  - name: Copy .vimrc into home
-    copy:
-      src: "{{ homedir }}/tmp/dotfiles/.vimrc"
-      dest: "{{ homedir }}/.vimrc"
+    - name: Copy .vimrc into home
+      copy:
+        src: "{{ homedir }}/tmp/dotfiles/.vimrc"
+        dest: "{{ homedir }}/.vimrc"
 
-  - name: Copy .bashrc into home
-    copy:
-      src: "{{ homedir }}/tmp/dotfiles/.bashrc"
-      dest: "{{ homedir }}/.bashrc"
+    - name: Copy .bashrc into home
+      copy:
+        src: "{{ homedir }}/tmp/dotfiles/.bashrc"
+        dest: "{{ homedir }}/.bashrc"
 
-  - name: Source .bashrc
-    shell: source {{ homedir }}/.bashrc
-    changed_when: False
-    become: yes
-    become_user: "{{ ansible_user_id }}"
+    - name: Source .bashrc
+      shell: source {{ homedir }}/.bashrc
+      changed_when: False
+      become: yes
+      become_user: "{{ ansible_user_id }}"
+
+    - name: Create dot directory for packages
+      file:
+        path: "{{ homedir }}/.other"
+        state: directory
+
+        
+    - set_fact:
+        lessxdg: "{{ lookup('env', 'XDG_CACHE_HOME') }}/less"
+
+    - name: Create cache directory for the less tool
+      file:
+        path: "{{ lessxdg }}"
+        state: directory
+      become: yes
+      become_user: "{{ ansible_user_id }}"
+      changed_when: False
+
+    - name: Create config directory for the less tool
+      file:
+        path: "{{ lookup('env', 'XDG_CONFIG_HOME') }}/less"
+        state: directory
+      become: yes
+      become_user: "{{ ansible_user_id }}"
+      changed_when: False
+
+    - name: .lesshst
+      stat: 
+        path: "{{ homedir }}/.lesshst"
+      register: lesshst
+
+    - name: Move .lesshst out of homedir
+      shell: mv {{ lesshst.stat.path }} {{ lessxdg }}/history
+      when: lesshst.stat.exists
+      changed_when: lesshst.stat.exists
+
+    - stat:
+        path: "{{ homedir }}/.sdkman"
+      register: sdkdir
+      changed_when: False
+
+    - name: Move .sdkman to .other
+      shell: |
+        rsync -a {{ sdkdir.stat.path }} {{ homedir }}/.other
+        rm -rf {{ sdkdir.stat.path }}
+      when: sdkdir.stat.exists
+    #- name: Move .sdkman to .other
+    #  shell: "{{ item }}"
+    #  with_items:
+    #    - rsync -a {{ sdkdir.stat.path }} {{ homedir }}/.other
+    #    - rm -rf {{ sdkdir.stat.path }}
+    #  when: sdkdir.stat.exists
+
       
-  - set_fact:
-      lessxdg: "{{ lookup('env', 'XDG_CACHE_HOME') }}/less"
-
-  - name: Create cache directory for the less tool
-    file:
-      path: "{{ lessxdg }}"
-      state: directory
-    become: yes
-    become_user: "{{ ansible_user_id }}"
-    changed_when: False
-
-  - name: Create config directory for the less tool
-    file:
-      path: "{{ lookup('env', 'XDG_CONFIG_HOME') }}/less"
-      state: directory
-    become: yes
-    become_user: "{{ ansible_user_id }}"
-    changed_when: False
-
-  - name: .lesshst
-    stat: 
-      path: "{{ homedir }}/.lesshst"
-    register: lesshst
-
-  - name: Move .lesshst out of homedir
-    shell: mv {{ lesshst.stat.path }} {{ lessxdg }}/history
-    when: lesshst.stat.exists
-    changed_when: lesshst.stat.exists
 
