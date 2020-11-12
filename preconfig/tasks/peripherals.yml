@@ -1,0 +1,8 @@
+- name: Enable tap-to-click
+  shell: gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
+  
+#- name: Remap Fn and Ctrl
+#  shell: "{{ item }}"
+#  with_items:
+#    - xmodmap -e "keycode 151 = Control_L"
+#    - xmodmap -e "keycode 37 = XF86WakeUp"

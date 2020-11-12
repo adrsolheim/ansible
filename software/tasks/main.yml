@@ -1,6 +1,7 @@
 ---
 - include_vars: packages.yml
 
+- include_tasks: battery.yml
 - include_tasks: dnf_software.yml
 - include_tasks: flatpak.yml
 - include_tasks: spotify.yml

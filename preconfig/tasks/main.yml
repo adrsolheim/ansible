@@ -1,8 +1,11 @@
 # Configure a fresh install of Fedora 33" 
 - block:
-    - include_tasks: "{{ createmovedots.yml }}"
+    - include_tasks: createmovedots.yml
+    - include_tasks: peripherals.yml
   become: true
   become_user: "{{ ansible_user_id }}" 
+
+
 
 - include_tasks: dotfiles.yml
 - include_tasks: setup.yml

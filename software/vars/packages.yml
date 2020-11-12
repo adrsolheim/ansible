@@ -13,3 +13,4 @@ dnf_software_list:
   - python3-neovim
   - sway
   - ffmpeg
+  - gnome-tweak-tool
