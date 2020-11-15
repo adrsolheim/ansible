@@ -1,0 +1,11 @@
+- name: Install packages for battery management
+  dnf:
+    name:
+      - tlp
+      - tlp-rdw
+      - kernel-devel
+      - akmod-acpi_call
+      - akmod-tp_smapi
+    state: present
+    #enablerepo: 
+

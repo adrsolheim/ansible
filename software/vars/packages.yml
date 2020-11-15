@@ -14,3 +14,4 @@ dnf_software_list:
   - sway
   - ffmpeg
   - nmap
+  - gnome-tweak-tool

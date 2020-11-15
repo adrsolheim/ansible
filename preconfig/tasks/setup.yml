@@ -35,6 +35,21 @@
         validate_certs: no
       notify:
         - Update cache
+
+- name: Enable TLP repo
+  block:
+    - name: Install GPG key
+      rpm_key:
+        name: "{{ tlp_gpg_key }}"
+        state: present   
+
+    - name: Enable TLP
+      dnf:
+        name: "{{ tlp_repository }}"
+        state: present
+        validate_certs: no
+      notify:
+        - Update cache
     
 - name: Enable SSH server
   systemd:
