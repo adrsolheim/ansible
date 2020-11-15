@@ -21,11 +21,11 @@
         src: "{{ homedir }}/tmp/dotfiles/.bashrc"
         dest: "{{ homedir }}/.bashrc"
 
-    - name: Source .bashrc
-      shell: source {{ homedir }}/.bashrc
-      changed_when: False
-      become: yes
-      become_user: "{{ ansible_user_id }}"
+    #- name: Source .bashrc
+    #  shell: source {{ homedir }}/.bashrc
+    #  changed_when: False
+    #  become: yes
+    #  become_user: "{{ ansible_user_id }}"
 
     - name: Create dot directory for packages
       file:
@@ -78,6 +78,7 @@
     #    - rsync -a {{ sdkdir.stat.path }} {{ homedir }}/.other
     #    - rm -rf {{ sdkdir.stat.path }}
     #  when: sdkdir.stat.exists
-
+  become: yes
+  become_user: "{{ ansible_user_id }}"
       
 
