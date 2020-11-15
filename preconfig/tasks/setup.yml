@@ -40,7 +40,7 @@
   block:
     - name: Install GPG key
       rpm_key:
-        name: "{{ tlp_gpg_key }}"
+        key: "{{ tlp_gpg_key }}"
         state: present   
 
     - name: Enable TLP
